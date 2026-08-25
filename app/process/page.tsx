@@ -52,6 +52,7 @@ export default function Process() {
           fill
           priority
           placeholder="blur"
+          quality={70}
           className="object-cover"
         />
         <div className="absolute inset-0" />

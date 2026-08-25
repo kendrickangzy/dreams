@@ -52,6 +52,7 @@ export function ProcessSteps({ steps }: { steps: Step[] }) {
                   alt={step.image.alt}
                   fill
                   placeholder="blur"
+                  quality={70}
                   className="object-cover"
                   sizes="(min-width: 768px) 50vw, 100vw"
                 />
@@ -108,6 +109,7 @@ export function ProcessSteps({ steps }: { steps: Step[] }) {
                 alt={step.image.alt}
                 fill
                 placeholder="blur"
+                quality={70}
                 className="object-cover"
                 sizes="50vw"
               />
