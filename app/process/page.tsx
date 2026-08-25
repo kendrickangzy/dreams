@@ -1,36 +1,42 @@
 import Image from "next/image";
+import { ProcessSteps } from "./process-steps";
+import cambridgeImg from "./images/CambridgeUniversity_Building.webp";
+import benjaminDaviesImg from "./images/benjamin-davies-Oja2ty_9ZLM-unsplash.jpg";
+import viralLukeImg from "./images/viral-luke-TpFyNwGi7yM-unsplash.jpg";
+import yanYouChenImg from "./images/yan-you-chen-ZRxgXvbpIhQ-unsplash.jpg";
+import heroImg from "./images/_-cecile-XeJmFXu_jeU-unsplash.jpg";
 
 const UNIVERSITIES = [
-  { src: "/CambridgeUniversity_Building.webp", alt: "Cambridge University" },
-  { src: "/ImperialCollegeLondon_Building.webp", alt: "Imperial College London" },
-  { src: "/KingsCollegeLondon_Building.jpg", alt: "King's College London" },
-  { src: "/OxfordUniversity_Building.jpg", alt: "Oxford University" },
+  { src: cambridgeImg, alt: "Cambridge University" },
+  { src: benjaminDaviesImg, alt: "London Birds Eye View" },
+  { src: viralLukeImg, alt: "University College London" },
+  { src: yanYouChenImg, alt: "Durham University" },
 ];
 
 // Placeholder copy — swap in your real process content.
 const STEPS = [
   {
-    number: "01",
-    title: "Discovery",
-    body: "We start with a conversation — your academic profile, your goals, and the universities and courses you're aiming for. Replace this with your real step 1 copy.",
+    number: "1",
+    title: "Developing the Student",
+    body: "The Personal Statement, Admissions Tests, and Interviews all ask for academic interest and ability. The best and most natural way for students to excel in them, then, is to develop these interests organically. Our tutors, guaranteed specialists in your subject, will fast-track you to meaningful exploration in your given subject: Readings, resources, consultations, and competitions.",
     image: UNIVERSITIES[0],
   },
   {
-    number: "02",
-    title: "Strategy & Applications",
-    body: "We build a tailored application strategy together: course selection, personal statement, and every supporting document, refined until it's ready. Replace this with your real step 2 copy.",
+    number: "2",
+    title: "The Personal Statement",
+    body: "There’s no fixed template for a perfect personal statement. At the end of the day it has to be convincing. Our admissions experts rely on dozens of case studies to determine the optimal style of personal statement we recommend for each type of student. From start to finish, our expertise compounds your effort in ideation, research, writing, and drafting.",
     image: UNIVERSITIES[1],
   },
   {
-    number: "03",
-    title: "Interview & Test Prep",
-    body: "Mock interviews and admissions-test practice, built around what each university actually asks for. Replace this with your real step 3 copy.",
+    number: "3",
+    title: "Admissions Tests",
+    body: "Our resources, tutors, timelines, and guidance all work together to prepare and overprepare you for test day. At DREAMS, our goal is always to let our students score to their maximum potential. To that end, our admissions test services are managed by top scorers in their respective exams.",
     image: UNIVERSITIES[2],
   },
   {
-    number: "04",
-    title: "Offers & Beyond",
-    body: "From decisions to results day to enrolment, we stay with you through to the finish. Replace this with your real step 4 copy.",
+    number: "4",
+    title: "The Interview",
+    body: "Most decent applicants get to this stage, but few get past it. DREAMS prides itself on students’ interview abilities and we coach them with our tried-and-tested approach. By breaking down and tackling the different parts of the skills required for the interview, we ensure that those under our coaching emerge ready to impress and charm Oxbridge professors.",
     image: UNIVERSITIES[3],
   },
 ];
@@ -39,56 +45,31 @@ export default function Process() {
   return (
     <div className="flex flex-col bg-background font-sans">
       {/* Hero */}
-      <section className="flex flex-col h-screen w-full px-32 items-center justify-center overflow-hidden bg-background text-foreground">
+      <section className="relative h-screen w-full overflow-hidden">
+        <Image
+          src={heroImg}
+          alt="Hero Image"
+          fill
+          priority
+          placeholder="blur"
+          className="object-cover"
+        />
+        <div className="absolute inset-0" />
 
-        <h1 className="py-8 text-center text-6xl font-bold tracking-tight sm:text-8xl">
-          Our Process
-        </h1>
-
-        <h2 className="text-center text-xl">
-          At DREAMS, we believe in tailoring our approach to fit the needs of every unique student.
-          Our bespoke system allows us to craft each application based on that student’s strengths, background, and personality.
-          A coherent application — one that tells a story — is always a strong one.
-          Wherever you are in your journey, we’re here to help you build one. 
-        </h2>
+        <div className="absolute bottom-4 left-4 max-w-3xl p-4">
+          <h1 className="text-5xl font-bold tracking-tight text-background">
+            Our Process
+          </h1>
+          <p className="mt-6 text-lg leading-6 text-background/90">
+            At DREAMS, we believe in tailoring our approach to fit the needs of every unique student.
+            Our bespoke system allows us to craft each application based on that student’s strengths, background, and personality.
+            A coherent application — one that tells a story — is always a strong one.
+            Wherever you are in your journey, we’re here to help you build one.
+          </p>
+        </div>
       </section>
 
-      {/* Alternating sections */}
-      {STEPS.map((step, i) => {
-        const imageFirst = i % 2 === 1;
-        return (
-          <section
-            key={step.number}
-            className="flex w-full flex-col border-t border-border md:flex-row"
-          >
-            <div
-              className={`relative h-72 w-full md:h-auto md:w-1/2 md:min-h-140 ${
-                imageFirst ? "md:order-1" : "md:order-2"
-              }`}
-            >
-              <Image
-                src={step.image.src}
-                alt={step.image.alt}
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div
-              className={`flex w-full flex-col justify-center gap-4 px-8 py-16 md:w-1/2 md:px-16 ${
-                imageFirst ? "md:order-2" : "md:order-1"
-              }`}
-            >
-              <span className="font-mono text-sm text-accent">{step.number}</span>
-              <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-                {step.title}
-              </h2>
-              <p className="max-w-md text-lg leading-8 text-foreground/70">
-                {step.body}
-              </p>
-            </div>
-          </section>
-        );
-      })}
+      <ProcessSteps steps={STEPS} />
     </div>
   );
 }
