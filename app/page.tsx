@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import heroImg from "./images/paulina-b-BRuMXOIvMhs-unsplash.jpg";
+import heroImg from "./images/Home_Hero.jpg";
 
 export default function Home() {
   return (

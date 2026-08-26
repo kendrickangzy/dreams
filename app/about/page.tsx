@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import heroImg from "./images/chris-boland-hzuY8YVnUSA-unsplash.jpg";
+import heroImg from "./images/About_Hero.jpg";
 
 export default function About() {
   return (

@@ -1,16 +1,16 @@
 import Image from "next/image";
 import { ProcessSteps } from "./process-steps";
-import cambridgeImg from "./images/CambridgeUniversity_Building.webp";
-import benjaminDaviesImg from "./images/benjamin-davies-Oja2ty_9ZLM-unsplash.jpg";
-import viralLukeImg from "./images/viral-luke-TpFyNwGi7yM-unsplash.jpg";
-import yanYouChenImg from "./images/yan-you-chen-ZRxgXvbpIhQ-unsplash.jpg";
-import heroImg from "./images/_-cecile-XeJmFXu_jeU-unsplash.jpg";
+import process1 from "./images/Process1_Cambridge.jpg";
+import process2 from "./images/Process2_CanaryWharf.jpg";
+import process3 from "./images/Process3_LondonStreet.jpg";
+import process4 from "./images/Process4_LondonRiver.jpg";
+import heroImg from "./images/Process_Hero.jpg";
 
 const UNIVERSITIES = [
-  { src: cambridgeImg, alt: "Cambridge University" },
-  { src: benjaminDaviesImg, alt: "London Birds Eye View" },
-  { src: viralLukeImg, alt: "University College London" },
-  { src: yanYouChenImg, alt: "Durham University" },
+  { src: process1, alt: "Cambridge University" },
+  { src: process2, alt: "London Birds Eye View" },
+  { src: process3, alt: "University College London" },
+  { src: process4, alt: "Durham University" },
 ];
 
 // Placeholder copy — swap in your real process content.
