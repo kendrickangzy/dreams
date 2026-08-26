@@ -45,7 +45,7 @@ export default function Process() {
   return (
     <div className="flex flex-col bg-background font-sans">
       {/* Hero */}
-      <section className="relative h-screen w-full overflow-hidden">
+      <section className="relative h-[120vh] w-full overflow-hidden">
         <Image
           src={heroImg}
           alt="Hero Image"
@@ -54,10 +54,14 @@ export default function Process() {
           placeholder="blur"
           quality={70}
           className="object-cover"
+          style={{
+            maskImage: "linear-gradient(to bottom, black 0, black 100vh, transparent 120vh)",
+            WebkitMaskImage: "linear-gradient(to bottom, black 0, black 100vh, transparent 120vh)",
+          }}
         />
         <div className="absolute inset-0" />
 
-        <div className="absolute bottom-4 left-4 max-w-3xl p-4">
+        <div className="absolute bottom-[calc(20vh+1rem)] left-4 max-w-3xl p-4">
           <h1 className="text-5xl font-bold tracking-tight text-background">
             Our Process
           </h1>
