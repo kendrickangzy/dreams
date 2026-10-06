@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image, { type StaticImageData } from "next/image";
 
 interface Step {
@@ -8,6 +8,57 @@ interface Step {
   title: string;
   body: string;
   image: { src: StaticImageData; alt: string };
+}
+
+// Lazy-loads an image once it's within `bufferPx` of the viewport, rather
+// than waiting for the browser's own (uncontrollable) native lazy-load
+// threshold. Loading a bit early like this means the fetch has a head
+// start, so by the time it actually scrolls into view it's already there —
+// the "instant" feeling is really just a generous buffer.
+function LazyStepImage({
+  src,
+  alt,
+  sizes,
+  bufferPx = 800,
+}: {
+  src: StaticImageData;
+  alt: string;
+  sizes: string;
+  bufferPx?: number;
+}) {
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  const setRef = useCallback(
+    (el: HTMLDivElement | null) => {
+      if (!el || shouldLoad) return;
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0]?.isIntersecting) setShouldLoad(true);
+        },
+        { rootMargin: `${bufferPx}px 0px` }
+      );
+      observer.observe(el);
+      return () => observer.disconnect();
+    },
+    [bufferPx, shouldLoad]
+  );
+
+  return (
+    <div ref={setRef} className="absolute inset-0">
+      {shouldLoad && (
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          loading="eager"
+          placeholder="blur"
+          quality={70}
+          className="object-cover"
+          sizes={sizes}
+        />
+      )}
+    </div>
+  );
 }
 
 export function ProcessSteps({ steps }: { steps: Step[] }) {
@@ -47,13 +98,9 @@ export function ProcessSteps({ steps }: { steps: Step[] }) {
                   imageFirst ? "md:order-1" : "md:order-2"
                 }`}
               >
-                <Image
+                <LazyStepImage
                   src={step.image.src}
                   alt={step.image.alt}
-                  fill
-                  placeholder="blur"
-                  quality={70}
-                  className="object-cover"
                   sizes="(min-width: 768px) 50vw, 100vw"
                 />
               </div>
@@ -104,15 +151,7 @@ export function ProcessSteps({ steps }: { steps: Step[] }) {
               }}
               className="relative h-[50vh] lg:h-[70vh] w-full"
             >
-              <Image
-                src={step.image.src}
-                alt={step.image.alt}
-                fill
-                placeholder="blur"
-                quality={70}
-                className="object-cover"
-                sizes="50vw"
-              />
+              <LazyStepImage src={step.image.src} alt={step.image.alt} sizes="50vw" />
             </div>
           ))}
         </div>
